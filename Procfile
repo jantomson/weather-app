@@ -1,0 +1,1 @@
+web: gunicorn ilma_rakendus.wsgi --log-file -

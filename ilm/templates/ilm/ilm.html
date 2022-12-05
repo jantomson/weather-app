@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Mis ilm on?</title>
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.svg' %}"
+      sizes="any"
+      type="image/svg+xml"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <form method="POST">
+        <div class="header">
+          {% if request.user.is_authenticated %}
+          <p>Tere, {{request.user}}</p>
+          <a href="{% url 'logout' %}">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Logi välja
+          </a>
+          {% endif %}
+        </div>
+        {% csrf_token %}
+        <div class="search-box">
+          <i class="fa-solid fa-location-dot"></i>
+          <input type="text" name="city" placeholder="Linn" />
+          <button type="submit" class="fa-solid fa-magnifying-glass"></button>
+        </div>
+        <div class="not-found">
+          <img src="" alt="" />
+        </div>
+      </form>
+      <div class="weather-box">
+        <img src="{% static 'images/'|add:icon|add:'.png' %}" alt="" />
+        <p class="temperature">{{temp}} <span>°C</span></p>
+        <p class="description">{{description}}</p>
+      </div>
+      <div class="weather-details">
+        <div class="humidity">
+          <i class="fa-solid fa-water"></i>
+          <div class="text">
+            <span>{{humidity}}%</span>
+            <p>Niiskus</p>
+          </div>
+        </div>
+        <div class="wind">
+          <i class="fa-solid fa-wind"></i>
+          <div class="text">
+            <span>{{wind}} km/h</span>
+            <p>Tuulekiirus</p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="condition">
+        <p>{{description}}</p>
+        <p>{{time}}</p>
+      </div> -->
+    </div>
+  </body>
+</html>

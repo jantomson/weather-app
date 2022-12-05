@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Logi sisse</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: linear-gradient(
+          -45deg,
+          #97e3b7,
+          #2fa05ebc,
+          #9ef0c7,
+          #1e7347
+        );
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+        font-family: "Roboto", sans-serif;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .user_card {
+        width: 350px;
+        margin-top: auto;
+        margin-bottom: auto;
+        background: white;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        color: black;
+        height: 40vh;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 15px;
+      }
+
+      .form_container {
+        margin-top: 15px;
+      }
+
+      #form-title {
+        color: #727272;
+      }
+
+      .login_btn {
+        margin-top: 20px;
+        width: 100%;
+        background: #8ec3b0 !important;
+        color: white !important;
+        font-weight: 500;
+        border-radius: 15px;
+      }
+      .login_btn:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+      .login_container {
+        padding: 0 2rem;
+      }
+      .input_user,
+      .input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+
+      #messages {
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      .reg-link {
+        color: rgb(147, 147, 147);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .reg-link:hover {
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container h-100 wrapper">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <h3 id="form-title">Tere tulemast!</h3>
+          </div>
+          <div class="d-flex justify-content-center form_container">
+            <form method="POST" action="">
+              {% csrf_token %}
+              <div class="input-group mb-3">
+                <div class="input-group-append"></div>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Kasutajanimi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-2">
+                <div class="input-group-append"></div>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Parool"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="d-flex justify-content-center mt-3 login_container">
+                <input class="btn login_btn" type="submit" value="Logi sisse" />
+              </div>
+            </form>
+          </div>
+          {% for message in messages %}
+          <p id="messages">{{messages}}</p>
+          {% endfor %}
+          <div class="mt-4">
+            <div class="d-flex justify-content-center links">
+              Pole veel kasutajat?
+              <a href="{% url 'register' %}" class="ml-2 reg-link"
+                >Registreerima</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
