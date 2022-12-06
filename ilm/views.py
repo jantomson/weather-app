@@ -106,12 +106,21 @@ def home(request):
     elif description == "Snow":
         description == "lumesadu"
         icon = "snowflake"
-    elif description == "light snow":
+    elif description == "Light snow":
         description == "kerge lumesadu"
         icon = "snowflake"
     elif "thunderstorm" in description:
         description == "äiksetorm"
         icon = "lightning"
+    elif description == "fog":
+	description == "udu"
+	icon = "clouds"
+    elif description == "mist":
+	description == "udu"
+	icon = "clouds"
+    elif description == "sand":
+	description = "liivatorm"
+	icon = "sun"
 
     return render(request,'ilm/ilm.html', {'description':description,'icon':icon,"temp":math.ceil(temp),'time':time,'city':city,'humidity':humidity,'wind':math.ceil(wind)})
   
