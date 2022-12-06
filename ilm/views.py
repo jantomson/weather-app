@@ -57,7 +57,7 @@ def home(request):
     if 'city' in request.POST:
         city = request.POST['city']
     else:
-        city = "Tallinn"
+        city = 'Tallinn'
 
     appid = "73a1a511e5b200fef7f3862ca7ca902a"
     URL = "https://api.openweathermap.org/data/2.5/weather"
@@ -70,12 +70,17 @@ def home(request):
     temp = res['main']['temp']
     humidity = res['main']['humidity']
     wind = res['wind']['speed']
-    time = datetime.date.today()
-
     lumi = ['Heavy snow', 'Sleet',"Light shower sleet","Shower sleet","Shower snow","Heavy shower snow"]
+
     if description == "few clouds":
         description = "vähepilvine"
         icon = "sun"
+    elif description == "snow":
+        description = "lumesadu"
+        icon = "snowflake"
+    elif description == "light snow":
+        description = "kerge lumesadu"
+        icon = "snowflake"
     if description == "scattered clouds":
         description = "pilvine"
         icon = "clouds"
@@ -103,23 +108,18 @@ def home(request):
     elif description in lumi:
         description == "tugev lumesadu"
         icon = "snowflake"
-    elif description == "Snow":
-        description == "lumesadu"
-        icon = "snowflake"
-    elif description == "Light snow":
-        description == "kerge lumesadu"
-        icon = "snowflake"
     elif description == "thunderstorm":
         description == "äiksetorm"
         icon = "lightning"
     elif description == "fog":
         description == "udu"
         icon = "clouds"
-    elif description == "mist":
-        description == "udu"
-        icon = "clouds"
     elif description == "sand":
         description = "liivatorm"
         icon = "sun"
+    elif description == "haze":
+        description = "sumu"
+        icon = "clouds"
 
-    return render(request,'ilm/ilm.html', {'description':description,'icon':icon,"temp":math.ceil(temp),'time':time,'city':city,'humidity':humidity,'wind':math.ceil(wind)})
+    return render(request,'ilm/ilm.html', {'description':description,'icon':icon,"temp":math.ceil(temp),'city':city,'humidity':humidity,'wind':math.ceil(wind)})
+  
